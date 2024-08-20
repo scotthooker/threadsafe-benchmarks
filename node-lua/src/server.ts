@@ -4,7 +4,6 @@ import { holdSeatScript, reserveSeatScript, releaseSeatScript } from './luaScrip
 
 const app = express();
 
-let process;
 const redis = new Redis(process.env.REDIS_URL);
 
 app.use(express.json());
@@ -60,3 +59,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Node.js Lua service listening at http://localhost:${port}`);
 });
+

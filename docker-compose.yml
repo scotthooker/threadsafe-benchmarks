@@ -1,33 +1,15 @@
-services:
-  python-benchmark:
-    build:
-      context: ./python
-      dockerfile: Dockerfile
-    volumes:
-      - ./python:/app
-    command: python benchmark.pys
-
-  node-benchmark:
-    build:
-      context: ./node
-      dockerfile: Dockerfile
-    volumes:
-      - ./node:/app
-    command: node benchmark.js
-
-  go-benchmark:
-    build:
-      context: ./go
-      dockerfile: Dockerfile
-    volumes:
-      - ./go:/app
-    command: ./benchmark
-
-  bun-benchmark:
-    build:
-      context: ./bun
-      dockerfile: Dockerfile
-    volumes:
-      - ./bun:/app
-    command: bun run benchmark.ts
-
+  import { Elysia } from "elysia";
+    import { configureNotesRoutes } from "./routes/NotesRoute";
+    import { swagger } from "@elysiajs/swagger";
+    
+    const app = new Elysia();
+    
+    app
+    .use(swagger({
+  path: "/v1/swagger"
+  }))
+    .get("/", () => `Welcome to Bun Elysia`)
+    .group("/notes", configureNotesRoutes)
+    .listen(3000);
+    
+    console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);

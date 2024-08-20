@@ -1,6 +1,7 @@
 import { pbkdf2Sync } from 'crypto';
 
-let sharedCounter = 0;
+const sharedBuffer = new SharedArrayBuffer(4);
+const sharedCounter = new Int32Array(sharedBuffer);
 
 function simulateWork() {
     pbkdf2Sync('password', 'salt', 100000, 64, 'sha512');
@@ -8,11 +9,11 @@ function simulateWork() {
 
 function incrementCounter() {
     simulateWork();
-    sharedCounter++;
+    Atomics.add(sharedCounter, 0, 1);
 }
 
 async function runBenchmark(numThreads) {
-    sharedCounter = 0;
+    sharedCounter.fill(0);
     const startTime = performance.now();
 
     const promises = Array(numThreads).fill().map(() => {
@@ -29,7 +30,7 @@ async function runBenchmark(numThreads) {
     const endTime = performance.now();
     const duration = (endTime - startTime) / 1000; // Convert to seconds
 
-    console.log(`Bun - Threads: ${numThreads}, Time: ${duration.toFixed(4)}s, Counter: ${sharedCounter}`);
+    console.log(`Bun - Threads: ${numThreads}, Time: ${duration.toFixed(4)}s, Counter: ${sharedCounter[0]}`);
 }
 
 async function main() {

@@ -1,0 +1,15 @@
+{
+  "name": "event-seat-management",
+  "version": "1.0.0",
+  "description": "Event seat management system with benchmarking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "elysia": "^1.1.7",
+    "express": "^4.17.1",
+    "ioredis": "^4.27.6",
+    "uuid": "^8.3.2"
+  }
+}
