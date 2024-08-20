@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "elysia": "^0.1.0",
+    "atomics": "^1.0.0",
+    "fengari": "^0.1.4"
+  }
+}
