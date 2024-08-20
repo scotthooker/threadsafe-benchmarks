@@ -1,0 +1,12 @@
+{
+  "name": "bun-benchmark",
+  "version": "1.0.0",
+  "description": "Benchmarking application using Bun",
+  "main": "benchmark.js",
+  "scripts": {
+    "start": "bun run benchmark.js"
+  },
+  "dependencies": {
+    "bun": "latest"
+  }
+}

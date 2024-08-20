@@ -1,0 +1,33 @@
+services:
+  python-benchmark:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    volumes:
+      - ./python:/app
+    command: python benchmark.pys
+
+  node-benchmark:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    volumes:
+      - ./node:/app
+    command: node benchmark.js
+
+  go-benchmark:
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    volumes:
+      - ./go:/app
+    command: ./benchmark
+
+  bun-benchmark:
+    build:
+      context: ./bun
+      dockerfile: Dockerfile
+    volumes:
+      - ./bun:/app
+    command: bun run benchmark.ts
+
